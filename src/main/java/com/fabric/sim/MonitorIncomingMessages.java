@@ -11,7 +11,8 @@ public class MonitorIncomingMessages {
     private static final String QUEUE_NAME = "fd-to-fabric-sqs";
 
     private static final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-    private static final SQSMessagesFetcher messageFetcher = new SQSMessagesFetcher("", "", QUEUE_NAME);
+    private static final SQSMessagesFetcher messageFetcher =
+            new SQSMessagesFetcher(System.getenv("ACCESS_ID"), System.getenv("SECRET_KEY"), QUEUE_NAME);
 
     public static void main(String[] args) throws InterruptedException {
         scheduler.scheduleWithFixedDelay(messagesFetcher(), 0, 1, TimeUnit.SECONDS);
