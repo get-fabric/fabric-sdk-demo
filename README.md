@@ -1,29 +1,17 @@
-# README #
+# Fabric interface simulation 
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This demo files are meant to be used in order to test a retailer API to our way of communication,
+We have here 2 utilities, one is to receive and display incoming messages, and the other is for sending messages back 
 
-### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Usage
+#### Monitoring incoming messages 
+```bash
+ACCESS_ID=<aws access id> SECRET_KEY=<aws secret key id> ./gradlew monitorIncomingMessages
+```
+After you run it, every received message will be printed to the console 
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+#### Send a message back
+```bash
+ACCESS_ID=<aws access id> SECRET_KEY=<aws secret key id> ./gradlew sendMessage <file path>
+```

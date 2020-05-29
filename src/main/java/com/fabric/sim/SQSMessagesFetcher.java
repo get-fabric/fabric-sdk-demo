@@ -19,13 +19,13 @@ public class SQSMessagesFetcher {
         final AWSStaticCredentialsProvider credentialsProvider = createCredentialsProvider(accessId, secretKey);
         incomingMessageReader = new IncomingMessageReader(credentialsProvider);
         sqs = AmazonSQSClientBuilder.standard()
+                .withRegion("eu-central-1")
                 .withCredentials(credentialsProvider).build();
         this.queueUrl = sqs.getQueueUrl(queueName).getQueueUrl();
     }
 
     private AWSStaticCredentialsProvider createCredentialsProvider(String accessId, String secretKey) {
-        BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessId, secretKey);
-        return new AWSStaticCredentialsProvider(awsCreds);
+        return new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessId, secretKey));
     }
 
     public void processMessagesWith(Consumer<String> processor) {

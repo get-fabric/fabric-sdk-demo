@@ -8,24 +8,31 @@ import java.util.concurrent.TimeUnit;
 
 public class MonitorIncomingMessages {
 
-    private static final String QUEUE_NAME = "fd-to-fabric-sqs";
+    private static final String QUEUE_NAME = "fd-to-fabric-sqs-demo";
 
     private static final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private static final SQSMessagesFetcher messageFetcher =
             new SQSMessagesFetcher(System.getenv("ACCESS_ID"), System.getenv("SECRET_KEY"), QUEUE_NAME);
 
     public static void main(String[] args) throws InterruptedException {
-        scheduler.scheduleWithFixedDelay(messagesFetcher(), 0, 1, TimeUnit.SECONDS);
+        fetchMessagesEveryFiveSeconds();
+    }
+
+    private static void fetchMessagesEveryFiveSeconds() throws InterruptedException {
+        scheduler.scheduleWithFixedDelay(messagesFetcher(), 0, 5, TimeUnit.SECONDS);
         scheduler.awaitTermination(24, TimeUnit.HOURS);
     }
 
     private static Runnable messagesFetcher() {
         return () -> {
-            messageFetcher.processMessagesWith((String message) -> {
-                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-                System.out.println(timeStamp + " ====>");
-                System.out.println(message);
-            });
+            messageFetcher.processMessagesWith(MonitorIncomingMessages::printMessageLog);
         };
+    }
+
+    private static void printMessageLog(String message) {
+        String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime());
+        System.out.println(timeStamp + " ======>");
+        System.out.println(message);
+        System.out.println("-----");
     }
 }
