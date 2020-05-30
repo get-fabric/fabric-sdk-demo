@@ -1,4 +1,4 @@
-package com.fabric.sim;
+package com.fabric.sim.monitor;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;

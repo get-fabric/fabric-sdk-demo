@@ -20,5 +20,12 @@ task monitorIncomingMessages(type: JavaExec) {
     group = "Execution"
     description = "Run the main class with JavaExecTask"
     classpath = sourceSets.main.runtimeClasspath
-    main = "com.fabric.sim.MonitorIncomingMessages"
+    main = "com.fabric.sim.monitor.MonitorApp"
+}
+
+task sendAMessages(type: JavaExec) {
+    group = "Execution"
+    description = "Run the main class with JavaExecTask"
+    classpath = sourceSets.main.runtimeClasspath
+    main = "com.fabric.sim.send.SendApp"
 }

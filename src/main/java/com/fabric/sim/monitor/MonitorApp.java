@@ -1,4 +1,4 @@
-package com.fabric.sim;
+package com.fabric.sim.monitor;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -6,7 +6,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class MonitorIncomingMessages {
+public class MonitorApp {
 
     private static final String QUEUE_NAME = "fd-to-fabric-sqs-demo";
 
@@ -25,7 +25,7 @@ public class MonitorIncomingMessages {
 
     private static Runnable messagesFetcher() {
         return () -> {
-            messageFetcher.processMessagesWith(MonitorIncomingMessages::printMessageLog);
+            messageFetcher.processMessagesWith(MonitorApp::printMessageLog);
         };
     }
 
