@@ -12,12 +12,10 @@ public class
 
 MonitorApp {
 
-    private static final String QUEUE_NAME = "fd-to-fabric-sqs-demo";
-
     private static final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private static final Timer timer = new Timer();
     private static final SQSMessagesFetcher messageFetcher =
-            new SQSMessagesFetcher(System.getenv("ACCESS_ID"), System.getenv("SECRET_KEY"), QUEUE_NAME);
+            new SQSMessagesFetcher(System.getenv("ACCESS_ID"), System.getenv("SECRET_KEY"), System.getenv("SQS"));
 
     public static void main(String[] args) throws InterruptedException {
         timer.scheduleAtFixedRate(new MessagesFetcherTask(), 0, 5000);

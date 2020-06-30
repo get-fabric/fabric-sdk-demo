@@ -7,11 +7,11 @@ We have here 2 utilities, one is to receive and display incoming messages, and t
 ### Usage
 #### Monitoring incoming messages 
 ```bash
-ACCESS_ID=<aws access id> SECRET_KEY=<aws secret key id> ./gradlew monitorIncomingMessages
+ACCESS_ID=<aws access id> SECRET_KEY=<aws secret key id> SQS=fd-to-fabric-sqs-demo ./gradlew monitorIncomingMessages
 ```
 After you run it, every received message will be printed to the console 
 
 #### Send a message back
 ```bash
-ACCESS_ID=<aws access id> SECRET_KEY=<aws secret key id> ./gradlew sendMessage <file path>
+ACCESS_ID=<aws access id> SECRET_KEY=<aws secret key id> BUCKET=fd-to-fabric-bucket-demo ./gradlew sendAMessage --args=<file path>
 ```
